@@ -12,15 +12,30 @@ A comprehensive plugin structure for extending [LiteLLM](https://github.com/Berr
 
 ## Installation
 
+### Using uv (recommended)
+
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/tool-proxy.git
 cd tool-proxy
 
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies and create virtual environment
+uv sync
 
-# Install in development mode
+# Activate the virtual environment
+source .venv/bin/activate  # On Unix/macOS
+# or
+.venv\Scripts\activate  # On Windows
+```
+
+### Using pip
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/tool-proxy.git
+cd tool-proxy
+
+# Install the package
 pip install -e .
 ```
 
@@ -138,10 +153,9 @@ tool-proxy/
 │       ├── echo_provider.py      # Example: Echo provider
 │       ├── mock_api_provider.py  # Example: Mock API provider
 │       └── response_modifier.py  # Example: Response interceptors
-├── setup.py                  # Package setup
-├── pyproject.toml           # Modern Python project config
-├── requirements.txt         # Production dependencies
-├── requirements-dev.txt     # Development dependencies
+├── pyproject.toml           # Project configuration (uv/pip)
+├── uv.lock                  # Lock file for reproducible installs
+├── example_usage.py         # Usage examples
 └── README.md                # This file
 ```
 
@@ -292,24 +306,36 @@ response = litellm.completion(
 ### Setup Development Environment
 
 ```bash
-# Install development dependencies
-pip install -r requirements-dev.txt
+# Install all dependencies including dev dependencies
+uv sync --all-extras
 
+# Or install with specific groups
+uv sync --extra dev
+```
+
+### Development Commands
+
+```bash
 # Run tests
-pytest
+uv run pytest
 
 # Run tests with coverage
-pytest --cov=litellm_plugin --cov-report=html
+uv run pytest --cov=litellm_plugin --cov-report=html
 
 # Format code
-black litellm_plugin/
-isort litellm_plugin/
+uv run ruff format litellm_plugin/
+
+# Lint code
+uv run ruff check litellm_plugin/
+
+# Fix linting issues automatically
+uv run ruff check --fix litellm_plugin/
 
 # Type checking
-mypy litellm_plugin/
+uv run mypy litellm_plugin/
 
-# Linting
-flake8 litellm_plugin/
+# Run the example script
+uv run python example_usage.py
 ```
 
 ### Creating a New Provider

@@ -1,5 +1,16 @@
 # LiteLLM Plugin Structure
 
+> **⚠️ WARNING: EXPERIMENTAL PROJECT**
+>
+> This project is currently **under active development** and **does not work yet**. It is the result of heavily AI-assisted coding and is being used as an exploratory prototype. Do not use this in production or expect it to function as documented.
+>
+> - **Status**: Experimental / Work in Progress
+> - **Stability**: Not guaranteed
+> - **Testing**: Incomplete
+> - **Production Ready**: No
+>
+> See [DESIGN.md](DESIGN.md) for the planned architecture and design decisions.
+
 A comprehensive plugin structure for extending [LiteLLM](https://github.com/BerriAI/litellm) with custom providers and request/response interceptors.
 
 ## Features
